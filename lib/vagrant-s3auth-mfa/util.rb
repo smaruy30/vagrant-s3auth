@@ -20,8 +20,8 @@ module VagrantPlugins
       DEFAULT_REGION = 'us-east-1'.freeze
 
       LOCATION_TO_REGION = Hash.new { |_, key| key }.merge(
-        '' => 'us-east-1',
-        'EU' => 'eu-west-1',
+        '' => DEFAULT_REGION,
+        'EU' => 'eu-west-1'
       )
 
       class NullObject
