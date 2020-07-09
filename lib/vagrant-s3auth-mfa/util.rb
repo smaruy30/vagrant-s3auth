@@ -20,8 +20,9 @@ module VagrantPlugins
       DEFAULT_REGION = ENV['AWS_REGION'].freeze || 'us-east-1'.freeze
 
       LOCATION_TO_REGION = Hash.new { |_, key| key }.merge(
-        '' => DEFAULT_REGION,
-        'EU' => 'eu-west-1'
+        ''      => 'us-east-1',
+        'EU'    => 'eu-west-1',
+        'Tokyo' => 'ap-northeast-1'
       )
 
       class NullObject
