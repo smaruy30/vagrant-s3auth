@@ -17,12 +17,11 @@ module VagrantPlugins
       # See: https://github.com/aws/aws-sdk-ruby/blob/ab0eb18d0ce0a515254e207dae772864c34b048d/aws-sdk-core/lib/aws-sdk-core/credential_provider_chain.rb#L42
       AWS_ACCESS_KEY_ENV_VARS = %w[AWS_ACCESS_KEY_ID AMAZON_ACCESS_KEY_ID AWS_ACCESS_KEY].freeze
 
-      DEFAULT_REGION = ENV['AWS_REGION'].freeze || 'us-east-1'.freeze
+      DEFAULT_REGION = 'us-east-1'.freeze
 
       LOCATION_TO_REGION = Hash.new { |_, key| key }.merge(
-        ''      => 'us-east-1',
-        'EU'    => 'eu-west-1',
-        'Tokyo' => 'ap-northeast-1'
+        '' => 'us-east-1',
+        'EU' => 'eu-west-1',
       )
 
       class NullObject
@@ -35,6 +34,7 @@ module VagrantPlugins
         unless ENV['AWS_CONFIG_PROFILE'].nil?
           config = AWSConfig[ENV['AWS_CONFIG_PROFILE']]
           set_credentials_from_profile(config) if ::Aws.config.empty?
+          region = config.region
         end
         ::Aws::S3::Client.new(region: region)
       end
